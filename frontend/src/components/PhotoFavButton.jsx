@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { FavIcon } from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
 function PhotoFavButton(props) {
-  const { isFav, onClick } = props
+  const { handleClick } = props;
+  const [isFav, setIsFav] = useState(false);
+
+  const onClick = () => {
+    setIsFav(!isFav);
+    handleClick()
+  }
 
   return (
     <div onClick={onClick} className="photo-list__fav-icon">

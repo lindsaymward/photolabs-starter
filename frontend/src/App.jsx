@@ -8,17 +8,16 @@ import topics from './mocks/topics';
 
 const App = () => {
   const [seeDetails, setSeeDetails] = useState(false);
-  const [id, setID] = useState(0);
-  // const idIndex = photos.indexOf(id);
-  const { urls, similar_photos } = photos[0];
+  const [id, setID] = useState(1);
+  const photo = photos[id - 1];
   return (
     <div className="App">
       <HomeRoute photos={photos} topics={topics} setSeeDetails={setSeeDetails} setID={setID} />
       {seeDetails &&
         <PhotoDetailsModal
           setSeeDetails={setSeeDetails}
-          fullURL={urls.full}
-          similar_photos={similar_photos}
+          photo={photo}
+          similar_photos={photo.similar_photos}
         />}
     </div>
   );

@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PhotoListItem from './PhotoListItem';
 import '../styles/PhotoList.scss';
 
 const PhotoList = (props) => {
-  const { favPhotosID, setFavPhotosID, setID } = props
+  const { favPhotosID, setFavPhotosID, setID, styleClass } = props
+
+  const [isFav, setIsFav] = useState(false);
+
   const handleClick = (id) => {
+    setIsFav(true);
     const favPhotos = favPhotosID;
     if (favPhotos.includes(id)) {
       const idIndex = favPhotos.indexOf(id);
@@ -21,11 +25,11 @@ const PhotoList = (props) => {
         key={photo.id}
         id={photo.id} 
         imageSource={photo.urls.regular} 
-        username={photo.user.username}
-        isFav={props.favPhotosID.includes(photo.id)}
+        isFav={isFav}
         handleClick={() => {handleClick(photo.id)}}
         setSeeDetails={props.setSeeDetails}
         setID={setID} 
+        styleClass={styleClass}
         />
     );
   });

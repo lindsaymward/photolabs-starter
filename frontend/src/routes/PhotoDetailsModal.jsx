@@ -1,14 +1,15 @@
 import React from 'react';
 
 import '../styles/PhotoDetailsModal.scss';
+import PhotoList from '../components/PhotoList';
 
 export const PhotoDetailsModal = (props) => {
-  const { setSeeDetails, fullURL, similar_photos } = props;
-  console.log(fullURL);
-  console.log(similar_photos);
+  const { setSeeDetails, photo, similar_photos } = props;
+  const similarPhotosArr = Object.values(similar_photos);
+
   return (
     <div className='photo-details-modal'>
-      <button onClick={() => setSeeDetails(false)} className='photo-details-modal--close-button'>
+      <button onClick={() => setSeeDetails(false)} className='photo-details-modal__close-button'>
         <svg width="24" height="24" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clipPath="url(#clip0_428_287)">
             <path d="M14.0625 3.9375L3.9375 14.0625" stroke="black" strokeLinecap="round" strokeLinejoin="round" />
@@ -21,6 +22,13 @@ export const PhotoDetailsModal = (props) => {
           </defs>
         </svg>
       </button>
+      <div className="photo-details-modal__images">
+      <img src={photo.urls.full} className="photo-details-modal__image" />
+      <h2 className="photo-details-modal__header">Similar Photos</h2>
+    <div>
+      <PhotoList photos={similarPhotosArr} styleClass="photo-details-modal__images"/>
+      </div>
+      </div>
     </div>
   );
 };
