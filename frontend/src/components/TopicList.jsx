@@ -12,7 +12,7 @@ const TopicList = (props) => {
   return (
     <div className="top-nav-bar__topic-list">
       {topics}
-      <div className="topic-list__item"><FavBadge /></div>
+      <div className="topic-list__item"><FavBadge isFavPhotoExist={(props.favPhotosID.length) ? true : false}/></div>
     </div>
   );
 };
