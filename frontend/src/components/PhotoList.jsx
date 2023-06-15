@@ -3,7 +3,7 @@ import PhotoListItem from './PhotoListItem';
 import '../styles/PhotoList.scss';
 
 const PhotoList = (props) => {
-  const { favPhotosID, setFavPhotosID } = props
+  const { favPhotosID, setFavPhotosID, setID } = props
   const handleClick = (id) => {
     const favPhotos = favPhotosID;
     if (favPhotos.includes(id)) {
@@ -23,7 +23,9 @@ const PhotoList = (props) => {
         imageSource={photo.urls.regular} 
         username={photo.user.username}
         isFav={props.favPhotosID.includes(photo.id)}
-        handleClick={() => {handleClick(photo.id)}} 
+        handleClick={() => {handleClick(photo.id)}}
+        setSeeDetails={props.setSeeDetails}
+        setID={setID} 
         />
     );
   });
