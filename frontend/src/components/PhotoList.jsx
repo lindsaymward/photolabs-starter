@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PhotoListItem from './PhotoListItem';
 import '../styles/PhotoList.scss';
 
 const PhotoList = (props) => {
-  const { favPhotosID, setFavPhotosID, setID, styleClass } = props
+  const { favPhotosID, setFavPhotosID, setID } = props
 
   const handleClick = (id) => {
     const favPhotos = favPhotosID;
@@ -21,12 +21,13 @@ const PhotoList = (props) => {
       <PhotoListItem 
         key={photo.id}
         id={photo.id} 
+        location={photo.location}
         imageSource={photo.urls.regular} 
         isFav={favPhotosID.includes(photo.id)}
         handleClick={() => {handleClick(photo.id)}}
         setSeeDetails={props.setSeeDetails}
         setID={setID} 
-        styleClass={styleClass}
+        user={photo.user}
         />
     );
   });
