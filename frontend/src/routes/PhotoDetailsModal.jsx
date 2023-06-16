@@ -4,7 +4,7 @@ import '../styles/PhotoDetailsModal.scss';
 import PhotoList from '../components/PhotoList';
 
 export const PhotoDetailsModal = (props) => {
-  const { setSeeDetails, photo, similar_photos } = props;
+  const { setSeeDetails, photo, similar_photos, favPhotosID, setFavPhotosID } = props;
   const similarPhotosArr = Object.values(similar_photos);
 
   return (
@@ -23,11 +23,11 @@ export const PhotoDetailsModal = (props) => {
         </svg>
       </button>
       <div className="photo-details-modal__images">
-      <img src={photo.urls.full} className="photo-details-modal__image" />
-      <h2 className="photo-details-modal__header">Similar Photos</h2>
-    <div>
-      <PhotoList photos={similarPhotosArr} styleClass="photo-details-modal__images"/>
-      </div>
+        <img src={photo.urls.full} className="photo-details-modal__image" />
+        <h2 className="photo-details-modal__header">Similar Photos</h2>
+        <div>
+          <PhotoList photos={similarPhotosArr} favPhotosID={favPhotosID} setFavPhotosID={setFavPhotosID} styleClass="photo-details-modal__images" />
+        </div>
       </div>
     </div>
   );
