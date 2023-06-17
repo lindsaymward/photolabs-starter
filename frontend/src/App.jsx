@@ -24,6 +24,7 @@ const App = () => {
   return (
     <div className="App">
       <HomeRoute 
+        actions={state.ACTIONS}
         photos={photos} 
         topics={topics} 
         favPhotosID={state.favPhotosID}
@@ -33,6 +34,7 @@ const App = () => {
       />
       {state.openModal &&
         <PhotoDetailsModal
+          actions={state.ACTIONS}
           favPhotosID={state.favPhotosID}
           photo={state.photoSelected}
           similar_photos={state.photoSelected.similar_photos}

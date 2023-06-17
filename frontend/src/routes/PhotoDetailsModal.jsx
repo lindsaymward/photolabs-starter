@@ -5,12 +5,12 @@ import PhotoList from '../components/PhotoList';
 import PhotoFavButton from '../components/PhotoFavButton';
 
 export const PhotoDetailsModal = (props) => {
-  const { toggleModal, photo, similar_photos, favPhotosID, updateToFavPhotosIDs } = props;
+  const { actions, toggleModal, photo, similar_photos, favPhotosID, updateToFavPhotosIDs } = props;
   const similarPhotosArr = Object.values(similar_photos);
 
   return (
     <div className='photo-details-modal'>
-      <button onClick={toggleModal} className='photo-details-modal__close-button'>
+      <button onClick={() => toggleModal({ type: actions.TOGGLE_MODAL })} className='photo-details-modal__close-button'>
         <svg width="24" height="24" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clipPath="url(#clip0_428_287)">
             <path d="M14.0625 3.9375L3.9375 14.0625" stroke="black" strokeLinecap="round" strokeLinejoin="round" />
@@ -28,7 +28,7 @@ export const PhotoDetailsModal = (props) => {
         <img src={photo.urls.full} className="photo-details-modal__image" />
         <h2 className="photo-details-modal__header">Similar Photos</h2>
         <div>
-          <PhotoList photos={similarPhotosArr} favPhotosID={favPhotosID} updateToFavPhotosIDs={updateToFavPhotosIDs} />
+          <PhotoList actions={actions} photos={similarPhotosArr} favPhotosID={favPhotosID} updateToFavPhotosIDs={updateToFavPhotosIDs} />
         </div>
       </div>
     </div>

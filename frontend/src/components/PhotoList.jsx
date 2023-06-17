@@ -3,15 +3,15 @@ import PhotoListItem from './PhotoListItem';
 import '../styles/PhotoList.scss';
 
 const PhotoList = (props) => {
-  const { favPhotosID, updateToFavPhotosIDs, choosePhotoSelected, toggleModal } = props
+  const { actions, favPhotosID, updateToFavPhotosIDs, choosePhotoSelected, toggleModal } = props
 
   const clickFav = (id) => {
-    updateToFavPhotosIDs(id)
+    updateToFavPhotosIDs({ type: actions.FAV_PHOTO_TOGGLE, id: id })
   }
 
   const clickPhoto = (id) => {
-    choosePhotoSelected(props.photos, id);
-    toggleModal();
+    choosePhotoSelected({ type: actions.SELECT_PHOTO, array: props.photos, id: id });
+    toggleModal({ type: actions.TOGGLE_MODAL });
   };
 
   const photos = props.photos.map(photo => {
