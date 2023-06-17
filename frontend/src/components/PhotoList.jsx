@@ -3,18 +3,16 @@ import PhotoListItem from './PhotoListItem';
 import '../styles/PhotoList.scss';
 
 const PhotoList = (props) => {
-  const { favPhotosID, setFavPhotosID, setID } = props
+  const { favPhotosID, updateToFavPhotosIDs, choosePhotoSelected, toggleModal } = props
 
-  const handleClick = (id) => {
-    const favPhotos = favPhotosID;
-    if (favPhotos.includes(id)) {
-      const idIndex = favPhotos.indexOf(id);
-      favPhotos.splice(idIndex, 1);
-      setFavPhotosID([...favPhotos]);
-    } else {
-    setFavPhotosID([...favPhotos, id]);
-    }
+  const clickFav = (id) => {
+    updateToFavPhotosIDs(id)
   }
+
+  const clickPhoto = (id) => {
+    choosePhotoSelected(props.photos, id);
+    toggleModal();
+  };
 
   const photos = props.photos.map(photo => {
     return (
@@ -24,9 +22,9 @@ const PhotoList = (props) => {
         location={photo.location}
         imageSource={photo.urls.regular} 
         isFav={favPhotosID.includes(photo.id)}
-        handleClick={() => {handleClick(photo.id)}}
-        setSeeDetails={props.setSeeDetails}
-        setID={setID} 
+        clickFav={() => {clickFav(photo.id)}}
+        clickPhoto={() => {clickPhoto(photo.id)}}
+
         user={photo.user}
         />
     );
