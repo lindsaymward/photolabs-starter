@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './App.scss';
 
@@ -9,11 +9,34 @@ import useApplicationData from './hooks/useApplicationData';
 import HomeRoute from './routes/HomeRoute';
 import PhotoDetailsModal from './routes/PhotoDetailsModal';
 
-// Mock Data
-import photos from './mocks/photos';
-import topics from './mocks/topics';
-
 const App = () => {
+  const [photos, setPhotos] = useState([]);
+  const [topics, setTopics] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/photos', {
+      method: "GET",
+      headers: {
+        "Accept": 'application/json',
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(data => setPhotos(data));
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/topics', {
+      method: "GET",
+      headers: {
+        "Accept": 'application/json',
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(data => setTopics(data));
+  }, []);
+
   const {
     state,
     updateToFavPhotosIDs,
@@ -23,12 +46,12 @@ const App = () => {
 
   return (
     <div className="App">
-      <HomeRoute 
+      <HomeRoute
         actions={state.ACTIONS}
-        photos={photos} 
-        topics={topics} 
+        photos={photos}
+        topics={topics}
         favPhotosID={state.favPhotosID}
-        choosePhotoSelected={choosePhotoSelected} 
+        choosePhotoSelected={choosePhotoSelected}
         updateToFavPhotosIDs={updateToFavPhotosIDs}
         toggleModal={toggleModal}
       />
@@ -38,7 +61,7 @@ const App = () => {
           favPhotosID={state.favPhotosID}
           photo={state.photoSelected}
           similar_photos={state.photoSelected.similar_photos}
-          updateToFavPhotosIDs={updateToFavPhotosIDs} 
+          updateToFavPhotosIDs={updateToFavPhotosIDs}
           toggleModal={toggleModal}
         />}
     </div>
