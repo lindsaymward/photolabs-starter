@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
-
 import './App.scss';
 
 // Hooks
@@ -11,24 +10,22 @@ import HomeRoute from './routes/HomeRoute';
 import PhotoDetailsModal from './routes/PhotoDetailsModal';
 
 const App = () => {
-  const [photos, setPhotos] = useState([]);
-  const [topics, setTopics] = useState([]);
 
   // Initial render API calls
   useEffect(() => {
     axios.get('/api/photos')
-      .then(res => setPhotos(res.data));
+      .then(res => dispatchPhotos({ type: state.ACTIONS.SET_PHOTO_DATA, data: res.data }));
   }, []);
 
   useEffect(() => {
     axios.get('/api/topics')
-      .then(res => setTopics(res.data));
+      .then(res => dispatchTopics({ type: state.ACTIONS.SET_TOPIC_DATA, data: res.data }));
   }, []);
 
   // API call when topic clicked in topic list
   const getPhotosByTopics = (id) => {
     axios.get(`/api/topics/photos/${id}`)
-      .then(res => setPhotos(res.data));
+      .then(res => dispatchPhotos({ type: state.ACTIONS.SET_PHOTO_DATA, data: res.data }));
   };
 
   const {
@@ -36,14 +33,16 @@ const App = () => {
     updateToFavPhotosIDs,
     choosePhotoSelected,
     toggleModal,
+    dispatchPhotos,
+    dispatchTopics
   } = useApplicationData();
 
   return (
     <div className="App">
       <HomeRoute
         actions={state.ACTIONS}
-        photos={photos}
-        topics={topics}
+        photos={state.photos}
+        topics={state.topics}
         favPhotosID={state.favPhotosID}
         choosePhotoSelected={choosePhotoSelected}
         updateToFavPhotosIDs={updateToFavPhotosIDs}
@@ -55,7 +54,6 @@ const App = () => {
           actions={state.ACTIONS}
           favPhotosID={state.favPhotosID}
           photo={state.photoSelected}
-          similar_photos={state.photoSelected.similar_photos}
           updateToFavPhotosIDs={updateToFavPhotosIDs}
           toggleModal={toggleModal}
         />}

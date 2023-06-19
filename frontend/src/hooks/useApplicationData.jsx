@@ -1,11 +1,11 @@
-import React, { useReducer } from 'react';
+import { useReducer } from 'react';
 
 const useApplicationData = () => {
   const ACTIONS = {
     FAV_PHOTO_TOGGLE: 'FAV_PHOTO_TOGGLE',
+    SELECT_PHOTO: 'SELECT_PHOTO',
     SET_PHOTO_DATA: 'SET_PHOTO_DATA',
     SET_TOPIC_DATA: 'SET_TOPIC_DATA',
-    SELECT_PHOTO: 'SELECT_PHOTO',
     TOGGLE_MODAL: 'TOGGLE_MODAL'
   };
 
@@ -17,15 +17,14 @@ const useApplicationData = () => {
           return filtered;
         }
         return [...state, action.id];
-      case 'SET_PHOTO_DATA':
-        return;
-      case 'SET_TOPIC_DATA':
-        return;
       case 'SELECT_PHOTO':
-        return action.array[action.id - 1];
+        return action.array.find(photo => photo.id === action.id);
+      case 'SET_PHOTO_DATA':
+        return action.data;
+      case 'SET_TOPIC_DATA':
+        return action.data;
       case 'TOGGLE_MODAL':
         return !state;
-
       default:
         return state;
     }
@@ -34,19 +33,25 @@ const useApplicationData = () => {
   const [favPhotosID, updateToFavPhotosIDs] = useReducer(reducer, []);
   const [photoSelected, choosePhotoSelected] = useReducer(reducer, {});
   const [openModal, toggleModal] = useReducer(reducer, false);
+  const [photos, dispatchPhotos] = useReducer(reducer, []);
+  const [topics, dispatchTopics] = useReducer(reducer, []);
 
   const state = {
     ACTIONS,
     favPhotosID,
     openModal,
-    photoSelected
+    photoSelected,
+    photos,
+    topics
   };
 
   return {
     state,
     updateToFavPhotosIDs,
     choosePhotoSelected,
-    toggleModal
+    toggleModal,
+    dispatchPhotos,
+    dispatchTopics
   };
 };
 

@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PhotoList from "../components/PhotoList";
 import TopNavigationBar from "../components/TopNavigationBar";
 import "../styles/HomeRoute.scss";
 
 const HomeRoute = (props) => {
+  const { topics, favPhotosID, getPhotosByTopics, actions, photos, updateToFavPhotosIDs, choosePhotoSelected, toggleModal } = props;
+
   return (
     <div className="home-route">
-      <TopNavigationBar topics={props.topics} favPhotosID={props.favPhotosID} getPhotosByTopics={props.getPhotosByTopics} />
-      <PhotoList 
-        actions={props.actions}
-        photos={props.photos} 
-        favPhotosID={props.favPhotosID} 
-        updateToFavPhotosIDs={props.updateToFavPhotosIDs} 
-        choosePhotoSelected={props.choosePhotoSelected}
-        toggleModal={props.toggleModal}
+      <TopNavigationBar topics={topics} favPhotosID={favPhotosID} getPhotosByTopics={getPhotosByTopics} />
+      <PhotoList
+        actions={actions}
+        photos={photos}
+        favPhotosID={favPhotosID}
+        updateToFavPhotosIDs={updateToFavPhotosIDs}
+        choosePhotoSelected={choosePhotoSelected}
+        toggleModal={toggleModal}
       />
     </div>
   );

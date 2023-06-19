@@ -5,8 +5,7 @@ import PhotoList from '../components/PhotoList';
 import PhotoFavButton from '../components/PhotoFavButton';
 
 export const PhotoDetailsModal = (props) => {
-  const { actions, toggleModal, photo, similar_photos, favPhotosID, updateToFavPhotosIDs } = props;
-  const similarPhotosArr = Object.values(similar_photos);
+  const { actions, toggleModal, photo, favPhotosID, updateToFavPhotosIDs } = props;
 
   return (
     <div className='photo-details-modal'>
@@ -28,7 +27,7 @@ export const PhotoDetailsModal = (props) => {
         <img src={photo.urls.full} className="photo-details-modal__image" />
         <h2 className="photo-details-modal__header">Similar Photos</h2>
         <div>
-          <PhotoList actions={actions} photos={similarPhotosArr} favPhotosID={favPhotosID} updateToFavPhotosIDs={updateToFavPhotosIDs} />
+          <PhotoList actions={actions} photos={photo.similar_photos} favPhotosID={favPhotosID} updateToFavPhotosIDs={updateToFavPhotosIDs} />
         </div>
       </div>
     </div>
