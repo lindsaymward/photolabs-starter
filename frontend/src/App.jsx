@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { DarkModeProvider } from './context/DarkModeContext';
 import axios from 'axios';
 import './App.scss';
 
@@ -43,26 +44,28 @@ const App = () => {
 
   return (
     <div className="App">
-      <HomeRoute
-        actions={state.ACTIONS}
-        photos={state.photos}
-        topics={state.topics}
-        favPhotosID={state.favPhotosID}
-        choosePhotoSelected={choosePhotoSelected}
-        updateToFavPhotosIDs={updateToFavPhotosIDs}
-        toggleModal={toggleModal}
-        getPhotosByTopics={getPhotosByTopics}
-        clickFav={clickFav}
-      />
-      {state.openModal &&
-        <PhotoDetailsModal
+      <DarkModeProvider>
+        <HomeRoute
           actions={state.ACTIONS}
+          photos={state.photos}
+          topics={state.topics}
           favPhotosID={state.favPhotosID}
-          photo={state.photoSelected}
+          choosePhotoSelected={choosePhotoSelected}
           updateToFavPhotosIDs={updateToFavPhotosIDs}
           toggleModal={toggleModal}
+          getPhotosByTopics={getPhotosByTopics}
           clickFav={clickFav}
-        />}
+        />
+        {state.openModal &&
+          <PhotoDetailsModal
+            actions={state.ACTIONS}
+            favPhotosID={state.favPhotosID}
+            photo={state.photoSelected}
+            updateToFavPhotosIDs={updateToFavPhotosIDs}
+            toggleModal={toggleModal}
+            clickFav={clickFav}
+          />}
+      </DarkModeProvider>
     </div>
   );
 };
