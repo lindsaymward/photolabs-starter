@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 import './App.scss';
 
@@ -13,40 +14,21 @@ const App = () => {
   const [photos, setPhotos] = useState([]);
   const [topics, setTopics] = useState([]);
 
+  // Initial render API calls
   useEffect(() => {
-    fetch('/api/photos', {
-      method: "GET",
-      headers: {
-        "Accept": 'application/json',
-        "Content-Type": "application/json"
-      }
-    })
-      .then(res => res.json())
-      .then(data => setPhotos(data));
+    axios.get('/api/photos')
+      .then(res => setPhotos(res.data));
   }, []);
 
   useEffect(() => {
-    fetch('/api/topics', {
-      method: "GET",
-      headers: {
-        "Accept": 'application/json',
-        "Content-Type": "application/json"
-      }
-    })
-      .then(res => res.json())
-      .then(data => setTopics(data));
+    axios.get('/api/topics')
+      .then(res => setTopics(res.data));
   }, []);
 
+  // API call when topic clicked in topic list
   const getPhotosByTopics = (id) => {
-    fetch(`/api/topics/photos/${id}`, {
-      method: "GET",
-      headers: {
-        "Accept": 'application/json',
-        "Content-Type": "application/json"
-      }
-    })
-      .then(res => res.json())
-      .then(data => setPhotos(data));
+    axios.get(`/api/topics/photos/${id}`)
+      .then(res => setPhotos(res.data));
   };
 
   const {
