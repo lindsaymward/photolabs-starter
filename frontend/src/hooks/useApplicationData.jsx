@@ -13,7 +13,7 @@ const useApplicationData = () => {
     switch (action.type) {
       case 'FAV_PHOTO_TOGGLE':
         if (state.includes(action.id)) {
-          const filtered = state.filter((favPhotoID) => favPhotoID !== action.id)
+          const filtered = state.filter((favPhotoID) => favPhotoID !== action.id);
           return filtered;
         }
         return [...state, action.id];
@@ -25,7 +25,7 @@ const useApplicationData = () => {
         return action.array[action.id - 1];
       case 'TOGGLE_MODAL':
         return !state;
-      
+
       default:
         return state;
     }

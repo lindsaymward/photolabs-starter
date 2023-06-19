@@ -37,11 +37,23 @@ const App = () => {
       .then(data => setTopics(data));
   }, []);
 
+  const getPhotosByTopics = (id) => {
+    fetch(`/api/topics/photos/${id}`, {
+      method: "GET",
+      headers: {
+        "Accept": 'application/json',
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(data => setPhotos(data));
+  };
+
   const {
     state,
     updateToFavPhotosIDs,
     choosePhotoSelected,
-    toggleModal
+    toggleModal,
   } = useApplicationData();
 
   return (
@@ -54,6 +66,7 @@ const App = () => {
         choosePhotoSelected={choosePhotoSelected}
         updateToFavPhotosIDs={updateToFavPhotosIDs}
         toggleModal={toggleModal}
+        getPhotosByTopics={getPhotosByTopics}
       />
       {state.openModal &&
         <PhotoDetailsModal

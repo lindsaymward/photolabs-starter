@@ -6,7 +6,7 @@ import FavBadge from './FavBadge';
 
 const TopicList = (props) => {
   const topics = props.topics.map((topic) => {
-    return <TopicListItem key={topic.id} title={topic.title} />;
+    return <TopicListItem key={topic.id} id={topic.id} title={topic.title} getPhotosByTopics={props.getPhotosByTopics} />;
   });
 
   return (
