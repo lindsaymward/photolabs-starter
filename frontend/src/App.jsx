@@ -28,6 +28,10 @@ const App = () => {
       .then(res => dispatchPhotos({ type: state.ACTIONS.SET_PHOTO_DATA, data: res.data }));
   };
 
+  const clickFav = (id) => {
+    updateToFavPhotosIDs({ type: state.ACTIONS.FAV_PHOTO_TOGGLE, id: id });
+  };
+
   const {
     state,
     updateToFavPhotosIDs,
@@ -48,6 +52,7 @@ const App = () => {
         updateToFavPhotosIDs={updateToFavPhotosIDs}
         toggleModal={toggleModal}
         getPhotosByTopics={getPhotosByTopics}
+        clickFav={clickFav}
       />
       {state.openModal &&
         <PhotoDetailsModal
@@ -56,6 +61,7 @@ const App = () => {
           photo={state.photoSelected}
           updateToFavPhotosIDs={updateToFavPhotosIDs}
           toggleModal={toggleModal}
+          clickFav={clickFav}
         />}
     </div>
   );

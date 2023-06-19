@@ -4,7 +4,7 @@ import TopNavigationBar from "../components/TopNavigationBar";
 import "../styles/HomeRoute.scss";
 
 const HomeRoute = (props) => {
-  const { topics, favPhotosID, getPhotosByTopics, actions, photos, updateToFavPhotosIDs, choosePhotoSelected, toggleModal } = props;
+  const { topics, favPhotosID, getPhotosByTopics, actions, photos, choosePhotoSelected, toggleModal, clickFav } = props;
 
   return (
     <div className="home-route">
@@ -13,7 +13,7 @@ const HomeRoute = (props) => {
         actions={actions}
         photos={photos}
         favPhotosID={favPhotosID}
-        updateToFavPhotosIDs={updateToFavPhotosIDs}
+        clickFav={clickFav}
         choosePhotoSelected={choosePhotoSelected}
         toggleModal={toggleModal}
       />

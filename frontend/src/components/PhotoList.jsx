@@ -3,11 +3,7 @@ import PhotoListItem from './PhotoListItem';
 import '../styles/PhotoList.scss';
 
 const PhotoList = (props) => {
-  const { actions, favPhotosID, updateToFavPhotosIDs, choosePhotoSelected, photos, toggleModal } = props;
-
-  const clickFav = (id) => {
-    updateToFavPhotosIDs({ type: actions.FAV_PHOTO_TOGGLE, id: id });
-  };
+  const { actions, favPhotosID, clickFav, choosePhotoSelected, photos, toggleModal } = props;
 
   const clickPhoto = (id) => {
     choosePhotoSelected({ type: actions.SELECT_PHOTO, array: photos, id: id });
@@ -24,7 +20,6 @@ const PhotoList = (props) => {
         isFav={favPhotosID.includes(photo.id)}
         clickFav={() => { clickFav(photo.id); }}
         clickPhoto={() => { clickPhoto(photo.id); }}
-
         user={photo.user}
       />
     );

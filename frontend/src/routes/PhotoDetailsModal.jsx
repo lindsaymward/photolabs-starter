@@ -2,10 +2,10 @@ import React from 'react';
 
 import '../styles/PhotoDetailsModal.scss';
 import PhotoList from '../components/PhotoList';
-import PhotoFavButton from '../components/PhotoFavButton';
+import PhotoListItem from '../components/PhotoListItem';
 
 export const PhotoDetailsModal = (props) => {
-  const { actions, toggleModal, photo, favPhotosID, updateToFavPhotosIDs } = props;
+  const { actions, toggleModal, photo, favPhotosID, clickFav } = props;
 
   return (
     <div className='photo-details-modal'>
@@ -23,11 +23,20 @@ export const PhotoDetailsModal = (props) => {
         </svg>
       </button>
       <div className="photo-details-modal__images">
-        <PhotoFavButton />
-        <img src={photo.urls.full} className="photo-details-modal__image" />
+        <div className="photo-details-modal__image">
+          <PhotoListItem
+            key={photo.id}
+            id={photo.id}
+            location={photo.location}
+            imageSource={photo.urls.full}
+            isFav={favPhotosID.includes(photo.id)}
+            clickFav={() => { clickFav(photo.id); }}
+            user={photo.user}
+          />
+        </div>
         <h2 className="photo-details-modal__header">Similar Photos</h2>
         <div>
-          <PhotoList actions={actions} photos={photo.similar_photos} favPhotosID={favPhotosID} updateToFavPhotosIDs={updateToFavPhotosIDs} />
+          <PhotoList actions={actions} photos={photo.similar_photos} favPhotosID={favPhotosID} clickFav={clickFav} />
         </div>
       </div>
     </div>
