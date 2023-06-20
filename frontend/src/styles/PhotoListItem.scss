@@ -10,6 +10,15 @@
   background-color: #FFFFFF;
 }
 
+.photo-list__item.dark {
+  background-color: #333;
+  border-color: #444;
+
+  .photo-list__user-details {
+    color:#bbb;
+  }
+}
+
 .photo-list__image {
   user-select: none;
   width: 300px;

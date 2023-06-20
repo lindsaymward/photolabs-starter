@@ -1,5 +1,10 @@
 .App {
-  margin: 24px;
+  padding: 24px;
+  background-color: #F5F5F5;
+}
+
+.App.dark {
+  background-color: black;
 }
 
 .App-logo {

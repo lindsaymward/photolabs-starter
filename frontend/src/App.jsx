@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { DarkModeProvider } from './context/DarkModeContext';
+import React, { useEffect, useContext } from 'react';
+import { DarkModeContext } from './context/DarkModeContext';
 import axios from 'axios';
 import './App.scss';
 
@@ -11,6 +11,7 @@ import HomeRoute from './routes/HomeRoute';
 import PhotoDetailsModal from './routes/PhotoDetailsModal';
 
 const App = () => {
+  const { darkMode } = useContext(DarkModeContext);
 
   // Initial render API calls
   useEffect(() => {
@@ -43,8 +44,7 @@ const App = () => {
   } = useApplicationData();
 
   return (
-    <div className="App">
-      <DarkModeProvider>
+      <div className={darkMode ? "App dark" : "App"}>
         <HomeRoute
           actions={state.ACTIONS}
           photos={state.photos}
@@ -65,8 +65,7 @@ const App = () => {
             toggleModal={toggleModal}
             clickFav={clickFav}
           />}
-      </DarkModeProvider>
-    </div>
+      </div>
   );
 };
 

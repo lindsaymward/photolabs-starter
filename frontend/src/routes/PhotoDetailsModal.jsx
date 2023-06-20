@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import '../styles/PhotoDetailsModal.scss';
 import PhotoList from '../components/PhotoList';
 import PhotoListItem from '../components/PhotoListItem';
+import { DarkModeContext } from '../context/DarkModeContext';
 
 export const PhotoDetailsModal = (props) => {
   const { actions, toggleModal, photo, favPhotosID, clickFav } = props;
+  const { darkMode } = useContext(DarkModeContext);
 
   return (
-    <div className='photo-details-modal'>
+    <div className={darkMode ? 'photo-details-modal dark' : 'photo-details-modal'}>
       <button onClick={() => toggleModal({ type: actions.TOGGLE_MODAL })} className='photo-details-modal__close-button'>
         <svg width="24" height="24" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clipPath="url(#clip0_428_287)">

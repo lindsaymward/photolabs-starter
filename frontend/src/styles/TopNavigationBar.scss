@@ -11,6 +11,15 @@
   background-color: #FFFFFF;
 }
 
+.top-nav-bar.dark {
+  background-color: #222;
+  color:#FFFFFF;
+
+  .top-nav-bar__logo {
+    color: white;
+  }
+}
+
 .top-nav-bar__logo {
   text-decoration: overline;
   font-weight: 500;
