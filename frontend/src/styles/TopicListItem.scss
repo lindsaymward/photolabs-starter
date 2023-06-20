@@ -5,6 +5,10 @@
 
 .topic-list__item.dark span {
   color: white;
+
+  &:hover {
+    color: #ddd;
+  }
 }
 
 .topic-list__item span {
